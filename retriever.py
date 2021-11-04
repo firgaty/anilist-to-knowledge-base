@@ -392,9 +392,9 @@ def sanitize_path(path: str) -> str:
     return path.replace("/", "_").replace("~", "_").replace(":", "_")
 
 
-def query_user_anime_list() -> Iterator[Anime]:
+def query_user_anime_list(username: str) -> Iterator[Anime]:
     variables = {
-        "userName": "firgaty",
+        "userName": username,
         "chunk": 1,
         "perChunk": 100,
     }
@@ -440,14 +440,14 @@ def to_markdown(anime: Anime, template: str, root: Path):
         f.write(string)
 
 
-def main(root: Path):
+def main(root: Path, username: str):
     root.mkdir(parents=True, exist_ok=True)
     template = ""
 
     with open("template-anime.md", "r") as f:
         template = f.read()
 
-    for i, anime in enumerate(query_user_anime_list()):
+    for i, anime in enumerate(query_user_anime_list(username)):
         print(f"\r\033[K{i: 4} {anime.info.title}", end="")
         to_markdown(anime, template, root)
 
@@ -457,8 +457,11 @@ if __name__ == "__main__":
     parser.add_argument(
         "dst", metavar="PATH", type=Path, help="Path to destination folder"
     )
+    parser.add_argument(
+        "username", metavar="USER", type=Path, help="Anilist username"
+    )
 
     args = parser.parse_args()
     parsed_args = vars(args)
 
-    main(parsed_args["dst"])
+    main(**parsed_args)
