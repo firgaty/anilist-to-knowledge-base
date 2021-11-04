@@ -153,7 +153,7 @@ class AnimeInfo:
     title_romaji: Optional[str]
     title_english: Optional[str]
     title_native: Optional[str]
-    title: Optional[str]
+    title: str
     synonyms: List[str]
     duration: int
     season: str
