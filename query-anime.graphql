@@ -1,0 +1,125 @@
+query ($userName: String, $chunk: Int, $perChunk: Int) {
+  MediaListCollection(userName: $userName, type: ANIME, chunk: $chunk, perChunk: $perChunk) {
+    hasNextChunk
+    lists {
+      name
+      entries {
+        mediaId
+        status
+        score(format: POINT_10)
+        progress
+        repeat
+        notes
+        startedAt {
+          year
+          month
+          day
+        }
+        completedAt {
+          year
+          month
+          day
+        }
+        updatedAt
+        media {
+          id
+          idMal
+          isAdult
+          type
+          format
+          isFavourite
+          title {
+            romaji
+            english
+            native
+            userPreferred
+          }
+          synonyms
+          duration
+          season
+          genres
+          status
+          studios {
+            edges {
+              node {
+                id
+                name
+              }
+              isMain
+            }
+          }
+          tags {
+            name
+          }
+          startDate {
+            year
+            month
+            day
+          }
+          endDate {
+            year
+            month
+            day
+          }
+          relations {
+            edges {
+              node {
+                id
+                title {
+                  userPreferred
+                }
+              }
+              relationType
+            }
+          }
+          seasonYear
+          episodes
+          description
+          coverImage {
+            extraLarge
+            large
+            medium
+            color
+          }
+          characters(sort: RELEVANCE, page: 1, perPage: 30) {
+            edges {
+              node {
+                id
+                name {
+                  userPreferred
+                }
+                image {
+                  medium
+                }
+              }
+              role
+              voiceActors(language: JAPANESE) {
+                id
+                name {
+                  userPreferred
+                }
+                image {
+                  medium
+                }
+              }
+            }
+          }
+          staff(page: 1, perPage: 100) {
+            edges {
+              role
+              node {
+                id
+                name {
+                  userPreferred
+                }
+                image {
+                  medium
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}
