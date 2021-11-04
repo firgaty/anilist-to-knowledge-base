@@ -455,10 +455,10 @@ def main(root: Path, username: str):
 if __name__ == "__main__":
     parser = argparse.ArgumentParser(description="Process some integers.")
     parser.add_argument(
-        "dst", metavar="PATH", type=Path, help="Path to destination folder"
+        "username", metavar="USERNAME", type=Path, help="Anilist username"
     )
     parser.add_argument(
-        "username", metavar="USER", type=Path, help="Anilist username"
+        "dst", metavar="PATH", type=Path, help="Path to destination folder"
     )
 
     args = parser.parse_args()
